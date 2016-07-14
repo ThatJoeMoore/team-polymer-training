@@ -1,0 +1,22 @@
+{
+  "name": "training",
+  "homepage": "https://github.com/ThatJoeMoore/team-polymer-training",
+  "authors": [
+    "Joseph Moore <yo.yo.yossarian@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "Apache-2.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.6.0"
+  }
+}
