@@ -21,8 +21,17 @@ limitations under the License.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="import" href="../libs/polymer/polymer.html">
+    <link rel="import" href="world-hello.html">
   </head>
   <body>
+    <world-hello></world-hello>
+    <world-hello country="it"></world-hello>
+
+    <script>
+      var el = document.createElement('world-hello');
+      el.country = 'fr';
+      document.body.appendChild(el);
+    </script>
 
   </body>
 </html>
