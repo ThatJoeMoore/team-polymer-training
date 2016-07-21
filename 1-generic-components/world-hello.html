@@ -1,0 +1,97 @@
+<!doctype html>
+<!--
+Copyright 2016 Brigham Young University
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ -->
+
+<html>
+  <head>
+    <title>lazy-stamped</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      world-hello {
+        display: block;
+      }
+
+      h3 {
+        background-color: red;
+        color: white;
+      }
+    </style>
+    <script src="../libs/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../libs/byu-page/byu-page.html">
+    <script>
+      var WorldHelloProto = Object.create(HTMLElement.prototype);
+
+      WorldHelloProto.createdCallback = function() {
+        this._shadow = this.createShadowRoot();
+        this._countryCode = this.getAttribute('country');
+        this._render();
+      }
+
+      WorldHelloProto._render = function() {
+        var hi = this._getHi(this._countryCode);
+        this._shadow.innerHTML =
+        '<style>h3 {background-color: blue; color: white;}</style>' +
+        '<h3>' + this._countryCode + '</h3>' +
+                          '<div>' + hi + '</div>';
+      };
+
+      WorldHelloProto.attributeChangedCallback = function(name, oldValue, newValue) {
+        if (name === 'country') {
+          this._countryCode = newValue;
+          this._render();
+        }
+      }
+
+      Object.defineProperty(WorldHelloProto, 'country', {
+        get: function() {
+          return this._countryCode;
+        },
+        set: function(v) {
+          this.setAttribute('country', v);
+        }
+      });
+
+      WorldHelloProto._getHi = function(countryCode) {
+       if (!countryCode) return '';
+       switch(countryCode) {
+         case 'us':
+         case 'uk':
+           return 'Hello!';
+         case 'fr':
+           return 'Salut!';
+         case 'it':
+           return 'Ciao!';
+         case 'ca':
+           return 'Hello, eh! Can I get you some Tim Horton\'s?';
+         case 'es':
+           return '¡Hola!';
+         default: 'Error: I don\'t speak that language!'
+       }
+     };
+
+      document.registerElement('world-hello', {prototype: WorldHelloProto});
+    </script>
+  </head>
+  <body>
+    <byu-page>
+        <div content>
+            <world-hello country="es"></world-hello>
+        </div>
+        <h3 page-title>Hello!</h3>
+    </byu-page>
+        </body>
+</html>

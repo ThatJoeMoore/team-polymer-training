@@ -1,0 +1,41 @@
+
+<dom-module id="world-hello">
+  <template>
+    <style>
+      h3 {
+        background-color: blue;
+        color: white;
+      }
+    </style>
+    <h3>{{country}}</h3>
+    <div>{{_sayHi(country)}}</div>
+  </template>
+  <script>
+    Polymer({
+      is: 'world-hello',
+      properties: {
+        country: {
+          type: String,
+          value: 'us'
+        }
+      },
+      _sayHi: function(country) {
+        if (!country) return '';
+        switch(country) {
+          case 'us':
+          case 'uk':
+            return 'Hello!';
+          case 'fr':
+            return 'Salut!';
+          case 'it':
+            return 'Ciao!';
+          case 'ca':
+            return 'Hello, eh! Can I get you some Tim Horton\'s?';
+          case 'es':
+            return '¡Hola!';
+          default: 'Error: I don\'t speak that language!'
+        }
+      }
+    });
+  </script>
+</dom-module>
