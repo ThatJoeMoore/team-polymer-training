@@ -16,82 +16,86 @@ limitations under the License.
  -->
 
 <html>
-  <head>
+<head>
     <title>lazy-stamped</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-      world-hello {
-        display: block;
-      }
+        world-hello {
+            display: block;
+        }
 
-      h3 {
-        background-color: red;
-        color: white;
-      }
+        h3 {
+            background-color: red;
+            color: white;
+        }
     </style>
     <script src="../libs/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="../libs/byu-page/byu-page.html">
     <script>
-      var WorldHelloProto = Object.create(HTMLElement.prototype);
+        var WorldHelloProto = Object.create(HTMLElement.prototype);
 
-      WorldHelloProto.createdCallback = function() {
-        this._shadow = this.createShadowRoot();
-        this._countryCode = this.getAttribute('country');
-        this._render();
-      }
-
-      WorldHelloProto._render = function() {
-        var hi = this._getHi(this._countryCode);
-        this._shadow.innerHTML =
-        '<style>h3 {background-color: blue; color: white;}</style>' +
-        '<h3>' + this._countryCode + '</h3>' +
-                          '<div>' + hi + '</div>';
-      };
-
-      WorldHelloProto.attributeChangedCallback = function(name, oldValue, newValue) {
-        if (name === 'country') {
-          this._countryCode = newValue;
-          this._render();
+        WorldHelloProto.createdCallback = function () {
+            this._shadow = this.createShadowRoot();
+            this._countryCode = this.getAttribute('country');
+            this._render();
         }
-      }
 
-      Object.defineProperty(WorldHelloProto, 'country', {
-        get: function() {
-          return this._countryCode;
-        },
-        set: function(v) {
-          this.setAttribute('country', v);
+        WorldHelloProto._render = function () {
+            var hi = this._getHi(this._countryCode);
+            this._shadow.innerHTML =
+                    '<style>h3 {background-color: blue; color: white;}</style>' +
+                    '<h3>' + this._countryCode + '</h3>' +
+                    '<div>' + hi + '</div>';
+        };
+
+        WorldHelloProto.attributeChangedCallback = function (name, oldValue, newValue) {
+            if (name === 'country') {
+                this._countryCode = newValue;
+                this._render();
+            }
         }
-      });
 
-      WorldHelloProto._getHi = function(countryCode) {
-       if (!countryCode) return '';
-       switch(countryCode) {
-         case 'us':
-         case 'uk':
-           return 'Hello!';
-         case 'fr':
-           return 'Salut!';
-         case 'it':
-           return 'Ciao!';
-         case 'ca':
-           return 'Hello, eh! Can I get you some Tim Horton\'s?';
-         case 'es':
-           return '¡Hola!';
-         default: 'Error: I don\'t speak that language!'
-       }
-     };
+        Object.defineProperty(WorldHelloProto, 'country', {
+            get: function () {
+                return this._countryCode;
+            },
+            set: function (v) {
+                this.setAttribute('country', v);
+            }
+        });
 
-      document.registerElement('world-hello', {prototype: WorldHelloProto});
+        WorldHelloProto._getHi = function (countryCode) {
+            if (!countryCode) return '';
+            switch (countryCode) {
+                case 'us':
+                case 'uk':
+                    return 'Hello!';
+                case 'fr':
+                    return 'Salut!';
+                case 'it':
+                    return 'Ciao!';
+                case 'ca':
+                    return 'Hello, eh! Can I get you some Tim Horton\'s?';
+                case 'es':
+                    return '¡Hola!';
+                default:
+                    'Error: I don\'t speak that language!'
+            }
+        };
+
+        document.registerElement('world-hello', {prototype: WorldHelloProto});
     </script>
-  </head>
-  <body>
-    <byu-page>
-        <div content>
-            <world-hello country="es"></world-hello>
-        </div>
-        <h3 page-title>Hello!</h3>
-    </byu-page>
-        </body>
+</head>
+<body>
+<div content>
+    <world-hello country="es"></world-hello>
+    <script>
+        var el = document.createElement('world-hello');
+        el.country = 'ca';
+
+        document.body.appendChild(el);
+    </script>
+</div>
+</body>
 </html>
