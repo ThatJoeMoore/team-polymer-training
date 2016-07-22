@@ -16,28 +16,41 @@ limitations under the License.
  -->
 
 <html>
-  <head>
+<head>
     <title>Polymer Properties</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="import" href="../libs/polymer/polymer.html">
-  </head>
-  <body>
 
-    <h1>Properties</h1>
-    <ol>
-      <li>Basics</li>
-      <li>Under the hood</li>
-      <li>Options
+    <link rel="import" href="world-hello.html">
+</head>
+<body>
+
+<h1>Properties</h1>
+<ol>
+    <li>Basics</li>
+    <li>Under the hood</li>
+    <li>Options
         <ol>
-          <li><code>readOnly</code></li>
-          <li><code>computed</code></li>
-          <li><code>reflectToAttribute</code></li>
-          <li><code>observer</code></li>
-          <li><code>notify</code></li>
+            <li><code>readOnly</code></li>
+            <li><code>computed</code></li>
+            <li><code>reflectToAttribute</code></li>
+            <li><code>observer</code></li>
+            <li><code>notify</code></li>
         </ol>
-      </li>
-    </ol>
+    </li>
+</ol>
 
-  </body>
+<div id="demo">
+    <world-hello country="us"></world-hello>
+    <script>
+        var el = document.createElement('world-hello');
+        el.country = 'uk';
+
+        document.getElementById('demo').appendChild(el);
+
+    </script>
+</div>
+
+</body>
 </html>
